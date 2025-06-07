@@ -25,4 +25,5 @@ export const Colors = {
   },
   cerulean: "#0a7ea4",
   white: "#fff",
+  black: "#000",
 };

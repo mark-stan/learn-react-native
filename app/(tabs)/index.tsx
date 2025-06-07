@@ -1,7 +1,23 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen() {
+  const handleDelete = () => {
+    console.log("Open alert");
+    Alert.alert(
+      "Are you sure you want to delete this?",
+      "It will be deleted permanently",
+      [
+        {
+          text: "Yes",
+          onPress: () => console.log("Delete item"),
+          style: "destructive",
+        },
+        { text: "Cancel", style: "cancel" },
+      ]
+    );
+  };
+
   return (
     // <ParallaxScrollView
     //   headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -64,9 +80,22 @@ export default function HomeScreen() {
           borderColor: Colors.cerulean,
           padding: 10,
           borderBottomWidth: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Text style={{ fontSize: 18, fontWeight: 200 }}>Coffee</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.black,
+            borderRadius: 6,
+            padding: 10,
+          }}
+          onPress={() => handleDelete()}
+        >
+          <Text style={{ color: Colors.white }}>Delete</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
