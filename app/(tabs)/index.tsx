@@ -1,23 +1,8 @@
+import { ShoppingListItem } from "@/components/ShoppingListItem";
 import { Colors } from "@/constants/Colors";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 
 export default function HomeScreen() {
-  const handleDelete = () => {
-    console.log("Open alert");
-    Alert.alert(
-      "Are you sure you want to delete this?",
-      "It will be deleted permanently",
-      [
-        {
-          text: "Yes",
-          onPress: () => console.log("Delete item"),
-          style: "destructive",
-        },
-        { text: "Cancel", style: "cancel" },
-      ]
-    );
-  };
-
   return (
     // <ParallaxScrollView
     //   headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -75,47 +60,9 @@ export default function HomeScreen() {
         backgroundColor: Colors.white,
       }}
     >
-      <View
-        style={{
-          borderColor: Colors.cerulean,
-          padding: 10,
-          borderBottomWidth: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ fontSize: 18, fontWeight: 200 }}>Coffee</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: Colors.black,
-            borderRadius: 6,
-            padding: 10,
-          }}
-          onPress={() => handleDelete()}
-        >
-          <Text style={{ color: Colors.white }}>Delete</Text>
-        </TouchableOpacity>
-      </View>
+      <ShoppingListItem name="Coffee" />
+      <ShoppingListItem name="Tea" />
+      <ShoppingListItem name="Sugar" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});
