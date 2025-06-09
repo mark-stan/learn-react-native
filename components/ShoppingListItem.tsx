@@ -1,10 +1,15 @@
 import { Colors } from "@/constants/Colors";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type ShoppingListItemProps = {
   name: string;
+  isCompleted?: boolean;
 };
-export const ShoppingListItem = ({ name }: ShoppingListItemProps) => {
+export const ShoppingListItem = ({
+  name,
+  isCompleted,
+}: ShoppingListItemProps) => {
   const handleDelete = () => {
     Alert.alert(
       `Are you sure you want to delete ${name}?`,
@@ -21,27 +26,46 @@ export const ShoppingListItem = ({ name }: ShoppingListItemProps) => {
   };
 
   return (
-    <View
-      style={{
-        borderColor: Colors.cerulean,
-        padding: 10,
-        borderBottomWidth: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ fontSize: 18, fontWeight: 200 }}>{name}</Text>
+    <View style={[styles.container, isCompleted && styles.completedContainer]}>
+      <Text style={[styles.itemName, isCompleted && styles.completedItemName]}>
+        {name}
+      </Text>
       <TouchableOpacity
-        style={{
-          backgroundColor: Colors.black,
-          borderRadius: 6,
-          padding: 10,
-        }}
-        onPress={() => handleDelete()}
+        style={styles.iconButton}
+        onPress={() => !isCompleted && handleDelete()}
       >
-        <Text style={{ color: Colors.white }}>Delete</Text>
+        <Ionicons
+          name="close-circle"
+          size={24}
+          color={isCompleted ? Colors.gray : Colors.red}
+        />
       </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    borderColor: Colors.cerulean,
+    padding: 10,
+    borderBottomWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  completedContainer: {
+    backgroundColor: Colors.lightGray,
+    borderColor: Colors.lightGray,
+  },
+  itemName: {
+    fontSize: 18,
+    fontWeight: 200,
+  },
+  completedItemName: {
+    color: Colors.gray,
+    textDecorationLine: "line-through",
+  },
+  iconButton: {
+    padding: 4,
+  },
+});

@@ -26,4 +26,7 @@ export const Colors = {
   cerulean: "#0a7ea4",
   white: "#fff",
   black: "#000",
+  lightGray: "#f0f0f0",
+  gray: "#808080",
+  red: "#ff0000",
 };
